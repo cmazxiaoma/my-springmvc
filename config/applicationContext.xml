@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:hdp="http://www.springframework.org/schema/hadoop" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util" xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+        http://www.springframework.org/schema/cache
+        http://www.springframework.org/schema/cache/spring-cache.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-3.1.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+        
+    <context:annotation-config/>
+    
+    <context:component-scan base-package="com.augmentum.exam" >
+    </context:component-scan>
+    
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="${driver}"></property>
+        <property name="jdbcUrl" value="${url}"></property>
+        <property name="user" value="${username}"></property>
+        <property name="password" value="${password}"></property>
+        <property name="maxPoolSize" value="20"></property>
+        <property name="minPoolSize" value="5"></property>
+        <property name="acquireIncrement" value="3"></property>
+        <property name="initialPoolSize" value="5"></property>
+    </bean>
+    
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="typeAliasesPackage" value="com.augmentum.exam.model"></property>
+        <property name="mapperLocations" value="classpath*:com/augmentum/exam/model/mysql/*Mapper.xml"></property>
+    </bean>
+    
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
+    </bean>
+    
+    <bean id="baseDao" abstract="true">
+        <property name="sqlSessionTemplate" ref="sqlSessionTemplate">
+        </property>
+    </bean>
+    
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    
+    <bean id="userDao" class="com.augmentum.exam.dao.impl.UserDaoImpl" parent="baseDao"></bean>
+    
+    <bean id="questionDao" class="com.augmentum.exam.dao.impl.QuestionDaoImpl" parent="baseDao"></bean>
+    
+
+    <bean id="questionService" class="com.augmentum.exam.service.impl.QuestionServiceImpl">
+         <property name="questionDao" ref="questionDao" />
+    </bean>
+    
+    <bean id="userService" class="com.augmentum.exam.service.impl.UserServiceImpl">
+        <property name="userDao" ref="userDao"/>
+    </bean>
+    
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="delete*" propagation="REQUIRED" read-only="false" rollback-for="com.augmentum.exam.exception.ParameterException"/>
+            <tx:method name="add*" propagation="REQUIRED" read-only="false" rollback-for="com.augmentum.exam.exception.ParameterException"/>
+            <tx:method name="update*" propagation="REQUIRED" read-only="false" rollback-for="com.augmentum.exam.exception.ParameterException"/>
+            <tx:method name="save*" propagation="REQUIRED" read-only="false" rollback-for="com.augmentum.exam.exception.ParameterException"/>
+            <tx:method name="*" propagation="SUPPORTS" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+    
+    <!-- this is advice -->
+    <bean id="logMethodTimeAdvice" class="com.augmentum.exam.service.impl.LogMethodTimeAspect"></bean>
+    
+    <aop:config>
+        <aop:pointcut expression="execution(* com.augmentum.exam.service..*.*(..))" id="pc"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pc" order="1"/>
+       <!-- this is aspect -->
+        <aop:aspect id="logMethodTimeAspect" ref="logMethodTimeAdvice">
+            <!-- this is Pointcut, com.augmentum.exam.service package class is proxy class-->
+            <aop:pointcut expression="execution(* com.augmentum.exam.service..*.*(..))" id="businessService"/>
+            <!-- connection joinPoint and advice method -->
+            <aop:around method="doAround" pointcut-ref="businessService"/>
+            <aop:before method="doBefore" pointcut-ref="businessService"/>
+            <aop:after method="doAfter" pointcut-ref="businessService"/>
+            <aop:after-throwing method="doThrowing" pointcut-ref="businessService" throwing="ex"/>
+        </aop:aspect>
+        
+    </aop:config>
+    
+    <bean id="userController" class="com.augmentum.exam.controller.UserController">
+        <property name="userService" ref="userService" /> 
+    </bean>
+    
+    <bean id="questionController" class="com.augmentum.exam.controller.QuestionController">
+        <property name="questionService" ref="questionService" /> 
+    </bean>
+    
+    <bean id="dashboardController" class="com.augmentum.exam.controller.DashboardController" /> 
+    
+    <bean class="com.augmentum.exam.utils.SpringUtil"></bean>
+    
+    <bean id="headBlock" class="com.augmentum.exam.block.HeadBlock">
+        <property name="template" value="/WEB-INF/jsp/block/headblock.jsp"></property>
+    </bean>
+    
+    <bean id="loginCookieSessionBlock" class="com.augmentum.exam.block.LoginCookieSessionBlock">
+        <property name="template" value="/WEB-INF/jsp/block/login_cookies_session.jsp"></property>
+    </bean>
+    
+    <bean id="indexSelectBlock" class="com.augmentum.exam.block.IndexSelectBlock">
+        <property name="template" value="/WEB-INF/jsp/block/index_select.jsp"></property>
+    </bean>
+    
+</beans>

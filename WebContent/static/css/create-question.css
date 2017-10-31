@@ -1,0 +1,189 @@
+@CHARSET "GB18030";
+#location_detail {
+    margin-top: 130px;
+    font-size: 12px;
+    font-family: "Arial", "Reular";
+    margin-left: 20px;
+    color: #0A0A0A;
+    position: absolute;
+}
+
+#create_content {
+    height: 500px;
+    margin-left: 300px;
+    margin-right: 300px;
+    border: 1px solid;
+    width: 640px;
+}
+
+.question-id-box {
+    font-size: 14px;
+    font-family: "Arial", "Reular";
+    color: #0A0A0A;
+    height: 30px;
+    margin-top: 30px;
+    width: 290px;
+}
+
+.question-id-box .text{
+    text-align: center;
+    width: 140px;
+    display: inline-block;
+    line-height: 30px;
+}
+.question-id-box .textinput {
+    border: 1px solid;
+    float: right;
+    width: 146px;
+    height: 24px;
+    outline: none;
+    border-radius: 3px;
+    border-color: #2E4358;
+}
+.question-content-box {
+    margin-top: 30px;
+    height: 80px;
+    width: 640px;
+}
+.question-content-box .text {
+    display: inline-block;
+    height: 80px;
+    line-height: 80px;
+    font-size: 14px;
+    font-family: "Arial", "Reular";
+    color: #0A0A0A;
+    width: 140px;
+    text-align: center;
+}
+.question-content-box .right {
+    display: inline-block;
+    width: 500px;
+    height: 80px;
+    float: right;
+    border-color: #2E4358;
+    border-radius: 3px;
+}
+.question-content-box .right .desc {
+    font-size: 14px;
+    font-family: "Arial", "Reular";
+    color: #0A0A0A;
+    resize: none;
+    border-radius: 3px;
+    width: 470px;
+    height: 75px;
+    outline: none;
+    margin-bottom: 20px;
+}
+.question-answer-box {
+    margin-top: 20px;
+    width: 640px;
+    height: 135.5px;
+}
+.question-answer-box .text {
+    vertical-align: text-top;
+    display: inline-block;
+    height: 135.5px;
+    font-size: 14px;
+    font-family: "Arial", "Reular";
+    color: #0A0A0A;
+    width: 140px;
+    text-align: center;
+}
+
+.question-answer-box .right {
+    display: inline-block;
+    width: 500px;
+    height: 135.5px;
+    float: right;
+}
+.choose-a {
+    height: 20px;
+}
+.a-checkbox {
+    cursor: pointer;
+    margin-left: 5px;
+    margin-top: 1.5px;
+    margin-bottom: 1.5px;
+    display: inline-block;
+    height: 17px;
+    width: 17px;
+}
+.a {
+    display: inline-block;
+    font-size: 14px;
+    margin-top: -4px;
+    font-family: "Arial", "Reular";
+    color: #0A0A0A;
+    vertical-align: text-top;
+}
+.input {
+    float: right;
+    outline: none;
+    border-radius: 3px;
+    width: 416px;
+    border: 1px solid;
+    border-color: #2E4358;
+    margin-right: 28px;
+}
+.question-answer-box .right .choose-b-c-d {
+    margin-top: 15px;
+    height: 20px;
+}
+.save-button {
+    cursor: pointer;
+    margin-top: 50px;
+    margin-left: 168px;
+    border-radius: 3px;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: top;
+    display: inline-block;
+    outline: none;
+    border: 0px;
+    height: 30px;
+    width: 150px;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-family: "Arial", "Reular";
+    background-color: #FE9901;
+}
+.cancel-button {
+    margin-top: 50px;
+    border-radius: 3px;
+    text-align: center;
+    margin-left: 30px;
+    text-decoration: none;
+    vertical-align: top;
+    display: inline-block;
+    line-height: 30px;
+    height: 30px;
+    width: 150px;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-family: "Arial", "Reular";
+    background-color: #FE9901;
+}
+
+#result_window {
+    z-index: 1;
+    border-radius: 5px;
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 400px;
+    height: 200px;
+    margin-left: -170px;
+    margin-top: -185px;
+    border: 1px solid;
+    background-color: #FFFFFF;
+    text-align: center;
+}
+
+#result_text {
+    margin-top: 80px;
+    text-align: center;
+    font-size: 16px;
+    font-family: "Arial", "Reular";
+    color: #0A0A0A;
+}

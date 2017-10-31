@@ -1,0 +1,208 @@
+@charset "utf-8";
+.errorMessage {
+    color: red;
+}
+#varpper {
+    width: 1280px; 
+    border: 1px solid; 
+    height: 760px;
+    margin: 0 auto;
+}
+.web_ico {
+    width: 180px;
+    height: 90px;
+    background-image: url(http://examstatic.com/css/images/LOGO_Web_Login_90x180.png);
+    position: relative;
+    margin-top: 300px;
+    margin-left: 170px;
+}
+
+.login_form {
+    width: 400px;
+    height: 320px;
+    border: 1px;
+    border-radius: 5px;
+    background-color: #2E4358;
+    margin-right: 170px;
+    margin-top: -320px;
+    margin-left: 710px;
+    position: relative;
+}
+.login_welcome_text {
+    font-size: 24px;
+    font-family: "Arial", "Reular";
+    color: #2E4358;
+    margin-top: -40px;
+    position: absolute;
+}
+.login_content {
+    position: absolute;
+    color: white;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+    width: 300px;
+    height: 240px;
+}
+.login_form_username_validate_img {
+    visibility: hidden;
+    margin-top: 7.5px;
+    margin-bottom: 7.5px;
+    margin-left: 310px;
+    position: absolute;
+    width: 16px;
+    hegiht: 16px;
+}
+.login_footer {
+    text-align: center;
+    width: 1280px;
+    height: 110px;
+    margin-top: 180px;
+    border-top: 1px solid;
+    position: relative;
+}
+.login_footer_text {
+    line-height: 12px;
+    margin-top: 10px;
+    position: relative;
+    color: #2E4358;
+    font-size: 12px;
+    font-family: "Arial", "Reular";
+}
+.tip_message {
+    padding-left: 5px;
+    line-height: 20px;
+    vertical-align: 4px;
+    visibility: hidden;
+    color: #FF0000;
+    font-size: 12px;
+    font-family: "Arial", "Reular";
+    background-color: #FCCB9B;
+    border: 1px solid;
+    border-color: #FFFFFF;
+    height: 20px;
+    width: 300px;
+    position: relative;
+}
+
+.login_form_username {
+    margin-top: 10px;
+    background-color: white;
+    height: 35px;
+    border-radius: 3px;
+    position: relative;
+}
+
+.login_form_button {
+    border: none;
+    width: 300px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px;
+    color: #FFFFFF;
+    font-size: 20px;
+    font-family: "Arial", "Reular";
+    margin-top: 20px;
+    position: relative;
+    height: 35px;
+    background-color: #FE9901;
+}
+
+.login_form_other {
+    height: 15px;
+    margin-top: 20px;
+    background-color: #2E4358;
+}
+
+.login_form_checkbox_text {
+    padding-top: 1px;
+    margin-left: 5px;
+    font-size: 12px;
+    color: #FFFFFF;
+    font-family: "Arial", "Reular";
+    position: absolute;
+}
+
+.login_form_checkbox {
+    margin-left: -0.5px;
+    height: 13px;
+    width: 14px;
+}
+.login_form_forgotpassword_text {
+    padding-top: 1px;
+    font-size: 12px;
+    color: #FFFFFF;
+    font-family: "Arial", "Reular";
+    position: absolute;
+    margin-left: 183.5px; 
+}
+
+.login_form_button_text {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    position: relative;
+    padding:3px;
+}
+
+.login_form_username_input {
+    font-family: "Arial", "Reular";
+    font-size: 14px;
+    outline: none;
+    background-color: #FFFFFF;
+    border: none;
+    margin-left: 50px;
+    width: 247px;
+    height: 35px;
+    position: absolute;
+}
+
+.login_form_password_intput {
+    font-family: "Arial", "Reular";
+    font-size: 14px;
+    outline: none;
+    background-color: #FFFFFF;
+    border: none;
+    height: 35px;
+    width: 247px;
+    position: absolute;
+    margin-left: 50px;
+}
+.login_form_password_logo {
+    width: 15px;
+    height: 20px;
+    margin-left: 17.5px;
+    margin-top: 7.5px;
+    margin-bottom: 7.5px;
+    position: absolute;
+    background-image: url(http://examstatic.com/css/images/ICN_Password_20x15.png);
+}
+
+.login_form_username_logo {
+    width: 20px;
+    height: 20px;
+    margin-left: 15px;
+    margin-top: 7.5px;
+    margin-bottom: 7.5px;
+    position: absolute;
+    background-image: url(http://examstatic.com/css/images/ICN_Usename_20x20.png);
+}
+
+.login_form_password {
+    margin-top: 20px;
+    background-color: white;
+    height: 35px;
+    border-radius: 3px;
+    position: relative;
+}
+.web_name {
+    width: 380px;
+    height: 30px;
+    font-weight: bold;
+    font-size: 30px;
+    font-family: "Arial";
+    color: #2E4358;
+    margin-left: 170px;
+    margin-top: 50px;
+    position:relative;
+}

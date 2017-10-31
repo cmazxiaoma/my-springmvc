@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.augmentum.exam.model.Question">
+    <resultMap type="Question" id="questionMap">
+        <id column="id" property="questionId"/>
+        <id column="question_code_id" property="questionCodeId"/>
+        <result column="question_desc" property="questionDesc"/>
+        <result column="question_a_choose" property="questionAChoose"/>
+        <result column="question_b_choose" property="questionBChoose"/>
+        <result column="question_c_choose" property="questionCChoose"/>
+        <result column="question_d_choose" property="questionDChoose"/>
+        <result column="answer" property="answer"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+    
+    <insert id="add" parameterType="Question" useGeneratedKeys="true" keyProperty="questionId">
+        <![CDATA[
+            INSERT INTO `question` (`id`, `question_code_id`, `question_desc`, `question_a_choose`, `question_b_choose`, `question_c_choose`, `question_d_choose`, `answer`, `create_time`, `update_time`) VALUES (null, #{questionCodeId}, #{questionDesc}, #{questionAChoose}, #{questionBChoose}, #{questionCChoose}, #{questionDChoose}, #{answer}, NOW(), NOW())
+        ]]>
+    </insert>
+    
+    <select id="checkCodeId" parameterType="String" resultMap="questionMap">
+        <![CDATA[
+            SELECT * FROM question WHERE question_code_id = #{questionCodeId}
+        ]]>
+    </select>
+    
+    <update id="update" parameterType="Question">
+        <![CDATA[
+            UPDATE question SET question_code_id = #{questionCodeId}, question_desc = #{questionDesc}, question_a_choose = #{questionAChoose}, question_b_choose = #{questionBChoose}, question_c_choose = #{questionCChoose}, question_d_choose = #{questionDChoose}, answer = #{answer}, update_time = NOW() WHERE id = #{questionId}
+        ]]>
+    </update>
+    
+    <select id="getCount" resultType="int">
+        <![CDATA[
+            SELECT COUNT(*) FROM question
+        ]]>
+    </select>
+    
+    <select id="getCountBySearch" resultType="int" parameterType="map">
+        <![CDATA[
+            SELECT COUNT(*) FROM question WHERE question_code_id LIKE #{questionCodeId} OR question_desc LIKE #{questionDesc} ORDER BY id DESC 
+        ]]>
+    </select>
+    
+    <select id="getById" resultMap="questionMap" parameterType="String">
+        <![CDATA[
+            SELECT * FROM question WHERE id = #{id}
+        ]]>
+    </select>
+    
+    <select id="queryByPage" resultMap="questionMap" parameterType="map">
+        <![CDATA[
+            SELECT * FROM question ORDER BY question_code_id ${sort} LIMIT #{offSet} , #{pageSize}
+        ]]>
+    </select>
+    
+    <select id="delete" parameterType="String">
+        <![CDATA[
+            DELETE FROM question WHERE id = #{id}
+        ]]>
+    </select>
+    
+    <select id="queryByFuzzy" resultMap="questionMap" parameterType="map">
+        <![CDATA[
+            SELECT * FROM question WHERE question_code_id LIKE #{questionCodeId} OR question_desc LIKE #{questionDesc} ORDER BY question_code_id ${sort} LIMIT #{offSet} , #{pageSize};
+        ]]>
+    </select>
+    
+    <select id="deleteByBatch" parameterType="String">
+        <![CDATA[
+            DELETE FROM question WHERE id in
+        ]]>
+        <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+</mapper>

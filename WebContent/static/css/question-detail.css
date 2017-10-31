@@ -1,0 +1,40 @@
+@CHARSET "UTF-8";
+#chooseA {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 475px;
+    height: 26px;
+}
+
+#chooseB {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 475px;
+    margin-top: 7px;
+    height: 26px;
+}
+
+#chooseC {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 475px;
+    margin-top: 7px;
+    height: 26px;
+}
+
+#chooseD {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 475px;
+    margin-top: 7px;
+    height: 26px;
+}
+
+.choose_text {
+    line-height: 26px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 14px;
+    font-family: "Arial", "Reular";
+    color: #0A0A0A;
+}
